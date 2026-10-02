@@ -26,8 +26,8 @@ int segmax(vector<int> a){
         }
     }
 
-    cout << '['<< i_min << ';' << j_max<< ']' <<endl;
-    return 1;
+    cout << '['<< i_min << ';' << j_max<< "] con somma " << somma << endl;
+    return 0;
 }
 
 int main(){
