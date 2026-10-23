@@ -16,7 +16,6 @@ static mt19937 gen(rd()); // static evita di creare ogni volta il generatore a o
 uniform_int_distribution<int> dist(a, b);
 
 return dist(gen);
-
 }
 
 vector<int> generaArrayCasuale(int n, int minVal = -100, int maxVal = 100){ // accetta solo n > 0 oppure tutti gli argomenti
@@ -29,33 +28,23 @@ vector<int> generaArrayCasuale(int n, int minVal = -100, int maxVal = 100){ // a
 
 void printArray(const vector<int>& B){
     for (auto x : B){
-        cout << x << " ";
+    cout << x << " ";
     }
     cout << endl;
 }
 
 /* DA COMPLETARE E FARE DEBUG */
 
-int Distribuzione(vector<int>& A, int sx, int px, int dx) {
-    if (px != dx) swap(A[px], A[dx]);
-    int p = A[dx];
-
-    int i = sx;
-    int j = dx - 1;
-    while (i <= j) {
-        while (i <= j && A[i] < p) i++;
-        while (i <= j && A[j] > p) j--;
-        if (i < j) {
-            swap(A[i], A[j]);
-            i++;
-            j--;
-        } else {
-            break;
-        }
+int Distribuzione(vector<int>& A, int sx, int px, int dx){ // mi occupo solo delle posizioni sx..dx
+    swap(A[px], A[dx]); // non serve se px == dx
+        // adesso il pivot è in A[dx]
+        int i = sx;
+        int j = dx-1;
+        while(i < j){
+        while (i < j && A[i] < A[dx]) i++; // avanza fintanto che abbiamo 0
+        while (i < j && A[j] > A[dx]) j--; // retrocedi fintanto che abbiamo 1
+        swap(A[i], A[j]);
     }
-
-    swap(A[i], A[dx]);
-    return i;
 }
 
 
@@ -69,11 +58,11 @@ void QuickSort(vector<int>& A, int sx, int dx) {
 }
 
 
+
+
 int main(){
-    //constexpr auto N = 12;
-    //vector<int> A = generaArrayCasuale(N);
-    vector<int> A = {15, 7, 8, 3, 18, 10, 5, 16};
-    auto N = A.size();
+    constexpr auto N = 12;
+    vector<int> A = generaArrayCasuale(N);
     printArray(A);
     Distribuzione(A, 0, N-1, N-1);
     printArray(A);
