@@ -32,6 +32,7 @@ void printArray(const vector<int>& B){
         cout << x << " ";
     }
     cout << endl;
+    cout << endl;
 }
 
 /* DA COMPLETARE E FARE DEBUG */
@@ -62,6 +63,11 @@ int Distribuzione(vector<int>& A, int sx, int px, int dx) {
 void QuickSort(vector<int>& A, int sx, int dx) {
     if (sx < dx) {
         int pivot = dx; // può essere qualunque valore in [sx .. dx]
+
+        //stampe per osservare l'albero della ricorsione
+        cout << "sx --> " << sx << "  " << "dx --> " << dx << endl;
+        printArray(A);
+
         int rango = Distribuzione(A, sx, pivot, dx);
         QuickSort(A, sx, rango - 1);
         QuickSort(A, rango + 1, dx);
@@ -74,8 +80,11 @@ int main(){
     //vector<int> A = generaArrayCasuale(N);
     vector<int> A = {15, 7, 8, 3, 18, 10, 5, 16};
     auto N = A.size();
-    printArray(A);
-    Distribuzione(A, 0, N-1, N-1);
-    printArray(A);
+    //printArray(A);
+    //Distribuzione(A, 0, N-1, N-1);
+    //printArray(A);
+
+    QuickSort(A, 0, N-1);
+
     return 0;
 }
